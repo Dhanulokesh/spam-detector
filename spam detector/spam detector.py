@@ -80,7 +80,7 @@ def predict_spam(message):
     prediction = model.predict(vectorized_msg)
     return "Spam" if prediction[0] == 1 else "Ham"
 
-print("\n🔍 Example Predictions:")
+print("\n Example Predictions:")
 test_messages = ["Congratulations! You've won a free iPhone!", "Hey, let's meet for lunch."]
 for msg in test_messages:
     print(f" Message: {msg} → Prediction: {predict_spam(msg)}")
