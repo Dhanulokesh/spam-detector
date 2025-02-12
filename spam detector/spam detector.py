@@ -17,9 +17,9 @@ nltk.download('wordnet')
 
 try:
     df = pd.read_csv("e:/projects/spam detector/spam.csv", encoding='latin-1')
-    print("✅ Dataset loaded successfully!")
+    print(" Dataset loaded successfully!")
 except FileNotFoundError:
-    print("❌ ERROR: 'spam.csv' not found. Please place it in 'e:/projects/'")
+    print(" ERROR: 'spam.csv' not found. Please place it in 'e:/projects/'")
     exit()
 
 df = df[['v1', 'v2']]
@@ -49,7 +49,7 @@ def clean_text(text):
 df['message'] = df['message'].fillna('')  
 df['cleaned_message'] = df['message'].apply(clean_text)
 
-print("\n✅ Sample cleaned messages:")
+print("\n Sample cleaned messages:")
 print(df[['message', 'cleaned_message']].head())
 
 vectorizer = TfidfVectorizer(max_features=5000)
@@ -60,12 +60,12 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 model = MultinomialNB()
 model.fit(X_train, y_train)
-print("✅ Model training completed!")
+print(" Model training completed!")
 
 y_pred = model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
-print(f"\n✅ Model Accuracy: {accuracy:.4f}")
-print("\n📌 Classification Report:\n", classification_report(y_test, y_pred))
+print(f"\n Model Accuracy: {accuracy:.4f}")
+print("\n Classification Report:\n", classification_report(y_test, y_pred))
 
 plt.figure(figsize=(5, 4))
 sns.heatmap(confusion_matrix(y_test, y_pred), annot=True, fmt='d', cmap='Blues', xticklabels=['Ham', 'Spam'], yticklabels=['Ham', 'Spam'])
@@ -83,4 +83,4 @@ def predict_spam(message):
 print("\n🔍 Example Predictions:")
 test_messages = ["Congratulations! You've won a free iPhone!", "Hey, let's meet for lunch."]
 for msg in test_messages:
-    print(f"📩 Message: {msg} → Prediction: {predict_spam(msg)}")
+    print(f" Message: {msg} → Prediction: {predict_spam(msg)}")
